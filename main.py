@@ -1,11 +1,13 @@
 from flask import Flask, render_template, url_for, request, redirect
 from data import db_session
 from data.car import Car
-from data.user import User 
+from data.user import User
 from flask_login import LoginManager, login_user, logout_user, login_required
 from data.loginform import LoginForm
 from data.registerform import RegisterForm
+import json
 import os
+import random
 
 
 db_session.global_init("db/cars.sqlite")
@@ -22,12 +24,46 @@ def load_user(user_id):
     session = db_session.create_session()
     return session.query(User).get(user_id)
 
+
+@app.route('/post', methods=['POST'])
+def main():
+    filter = request.json
+    cars = session.query(Car)
+    if "name" in filter.keys():
+        cars = cars.filter(Car.name.like(f"%"+filter["name"]+"%"))
+    if "minPrice" in filter.keys():
+        cars = cars.filter(Car.buyPryce > int(filter["minPrice"]))
+    if "maxPrice" in filter.keys():
+        cars = cars.filter(Car.buyPryce < int(filter["maxPrice"]))
+    if "timeTo1mile" in filter.keys():
+        cars=cars.filter(Car.mil1 <= filter["timeTo1mile"])
+    if "class" in filter.keys():
+        cars=cars.filter(Car.clas == filter["class"])
+    rezult = list()
+    for car in cars:
+        rez = dict()
+        rez["name"] = car.name
+        rez["maxSpeed"] = car.maxSpeed
+        rez["mass"] = car.mass
+        rez["persons"] = car.persons
+        rez["engineType"] = car.engineType
+        rez["buyPryce"] = car.buyPryce
+        rez["sellPryce"] = car.sellPryce
+        rez["timeTo1mile"] = car.mil1
+        rez["class"] = car.clas
+        rez["privod"] = car.privod
+        rez["addedInGameDlS"] = car.addedInGameDlS
+        rezult.append(rez)
+    return json.dumps(rezult)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form=LoginForm()
     if form.validate_on_submit():
-        session = db_session.create_session()
-        user = session.query(User).filter(User.username == form.username.data).first()
+        session=db_session.create_session()
+        user=session.query(User).filter(
+            User.username == form.username.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
@@ -45,13 +81,14 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reg():
-    form = RegisterForm()
+    form=RegisterForm()
     if form.validate_on_submit():
-        session = db_session.create_session()
-        user = User()
-        user.username = form.username.data
-        user.admin = False
-        user.user_id = len(list(session.query(User).filter(User.username == form.username.data)))
+        session=db_session.create_session()
+        user=User()
+        user.username=form.username.data
+        user.admin=False
+        user.user_id=len(list(session.query(User).filter(
+            User.username == form.username.data)))
         user.set_password(form.password.data)
         session.add(user)
         session.commit()
@@ -65,22 +102,22 @@ def test():
 
 @app.route("/")
 def index():
-    cars = session.query(Car)
+    cars=session.query(Car)
     if request.args.get('name') != None:
-        cars = cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
+        cars=cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
     return render_template("index.html", cars=cars, title='Выбор тс')
 
 @app.route("/compare")
 def compare():
-    carsIds = list(map(int, request.args.get('cars').split('_')))
-    cars = session.query(Car).filter(Car.id.in_(carsIds))
+    carsIds=list(map(int, request.args.get('cars').split('_')))
+    cars=session.query(Car).filter(Car.id.in_(carsIds))
     return render_template("compare.html", cars=cars, path=url_for('static', filename='previev'), title='Выбор тс')
 
 @app.route("/select", methods=['POST', 'GET'])
 def select():
-    cars = session.query(Car)
+    cars=session.query(Car)
     if request.args.get('name') != None:
-        cars = cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
+        cars=cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
 
     if request.method == 'GET':
         return render_template("select.html", path='/'.join(url_for('static', filename='previev/1.jpg').split('/')[:-1]), cars=cars, title='Выбор тс')
@@ -93,22 +130,22 @@ def createCar(name='',
               buyPryce=0, sellPryce=0, mil14=0.0, mil12=0.0,
               mil1=0.0, control=0.0, stop=0.0, addedInGameDlS='',
               clas='', privod='f'):
-    car = Car()
-    car.name = name
-    car.maxSpeed = maxSpeed
-    car.mass = mass
-    car.persons = persons
-    car.engineType = engineType
-    car.buyPryce = buyPryce
-    car.sellPryce = sellPryce
-    car.mil1 = mil1
-    car.mil12 = mil12
-    car.mil14 = mil14
-    car.control = control
-    car.stop = stop
-    car.addedInGameDlS = addedInGameDlS
-    car.clas = clas
-    car.privod = privod
+    car=Car()
+    car.name=name
+    car.maxSpeed=maxSpeed
+    car.mass=mass
+    car.persons=persons
+    car.engineType=engineType
+    car.buyPryce=buyPryce
+    car.sellPryce=sellPryce
+    car.mil1=mil1
+    car.mil12=mil12
+    car.mil14=mil14
+    car.control=control
+    car.stop=stop
+    car.addedInGameDlS=addedInGameDlS
+    car.clas=clas
+    car.privod=privod
     session.add(car)
     session.commit()
 
