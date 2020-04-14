@@ -10,8 +10,8 @@ class Car(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, 
                            primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    maxSpeed = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
-    to100 = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    maxSpeed = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    to100 = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     createdDate = sqlalchemy.Column(sqlalchemy.DateTime, 
                                      default=datetime.datetime.now)
-    addedInGameDls = sqlalchemy.Column(sqlalchemy.String)
+    addedInGameDlS = sqlalchemy.Column(sqlalchemy.String)
