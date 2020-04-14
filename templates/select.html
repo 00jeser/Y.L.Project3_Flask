@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form class="Chouse" method="post">
+    <div class="form-group" align="left">
+        <label for="col-md6 border rounded" align="left">Выберите машины для сравнения</label>
+
+        {% for item in cars%}
+        <div class="col-md6 border rounded" align="left">
+            <input class="form-check-input" type="checkbox" name="{{item.id}}" id="{{item.id}}" value="{{item.id}}"
+                align="left">
+            <label class="form-check-label" for="{{item.id}}">
+                <div class="">
+                    {{item.name}}
+                </div>
+                <div>
+                    <img width="150" src="{{path}}/{{item.id}}.jpg", alt="{{path}}">
+                </div>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Записаться</button>
+</form>
+{% endblock %}

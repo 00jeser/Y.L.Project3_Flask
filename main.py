@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from data import db_session
 from data.car import Car
 
@@ -9,7 +9,6 @@ session = db_session.create_session()
 app = Flask(__name__)
 
 
-
 @app.route("/")
 def index():
     cars = session.query(Car)
@@ -17,13 +16,27 @@ def index():
         cars = cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
     return render_template("index.html", cars=cars, title='Выбор тс')
 
+@app.route("/compare")
+def compare():
+    return render_template("select.html", title='Выбор тс')
+
+@app.route("/select", methods=['POST', 'GET'])
+def select():
+    cars = session.query(Car)
+    if request.args.get('name') != None:
+        cars = cars.filter(Car.name.like(f"%"+request.args.get('name')+"%"))
+
+    if request.method == 'GET':
+        return render_template("select.html", path='/'.join(url_for('static', filename='previev/1.jpg').split('/')[:-1]), cars=cars, title='Выбор тс')
+    elif request.method == 'POST':
+        return redirect(url_for('compare')+'?cars=' + '_'.join(request.form))
 
 
 def createCar(name='',
-maxSpeed=0,mass=0,persons=4,engineType='',
-buyPryce=0,sellPryce=0,mil14=0.0,mil12=0.0,
-mil1=0.0,control=0.0,stop=0.0,addedInGameDlS='',
-clas='',privod='f'):
+              maxSpeed=0, mass=0, persons=4, engineType='',
+              buyPryce=0, sellPryce=0, mil14=0.0, mil12=0.0,
+              mil1=0.0, control=0.0, stop=0.0, addedInGameDlS='',
+              clas='', privod='f'):
     car = Car()
     car.name = name
     car.maxSpeed = maxSpeed
