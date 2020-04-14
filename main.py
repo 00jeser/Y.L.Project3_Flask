@@ -8,6 +8,9 @@ session = db_session.create_session()
 
 app = Flask(__name__)
 
+@app.route("/test")
+def test():
+    return "it worked"
 
 @app.route("/")
 def index():
