@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1" align="center">
+    <tr>
+        <td></td>
+        {% for item in cars%}
+        <td><img width="300" src="{{path}}/{{item.id}}.jpg"/></td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Название</td>
+        {% for item in cars%}
+        <td align="center">{{item.name}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Класс</td>
+        {% for item in cars%}
+        <td align="center">{{item.clas}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Максимальная скорость</td>
+        {% for item in cars%}
+        <td align="center">{{item.maxSpeed}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Масса</td>
+        {% for item in cars%}
+        <td align="center">{{item.mass}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Количество мест</td>
+        {% for item in cars%}
+        <td align="center">{{item.persons}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Тип двигателя</td>
+        {% for item in cars%}
+        <td align="center">{{item.engineType}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Цена покупки</td>
+        {% for item in cars%}
+        <td align="center">{{item.buyPryce}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Цена продажи</td>
+        {% for item in cars%}
+        <td align="center">{{item.sellPryce}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Время прхождения<br/>1/4 мили</td>
+        {% for item in cars%}
+        <td align="center">{{item.mil14}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Время прхождения<br/>1/2 мили</td>
+        {% for item in cars%}
+        <td align="center">{{item.mil12}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Время прхождения<br/>1 мили</td>
+        {% for item in cars%}
+        <td align="center">{{item.mil1}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Управляемость</td>
+        {% for item in cars%}
+        <td align="center">{{item.control}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Торможение</td>
+        {% for item in cars%}
+        <td align="center">{{item.stop}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Привод</td>
+        {% for item in cars%}
+        <td align="center">{{item.privod}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Добавлена с обновлением</td>
+        {% for item in cars%}
+        <td align="center">{{item.addedInGameDlS}}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}

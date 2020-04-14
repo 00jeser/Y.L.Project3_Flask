@@ -18,7 +18,9 @@ def index():
 
 @app.route("/compare")
 def compare():
-    return render_template("select.html", title='Выбор тс')
+    carsIds = list(map(int, request.args.get('cars').split('_')))
+    cars = session.query(Car).filter(Car.id.in_(carsIds))
+    return render_template("compare.html", cars=cars, path=url_for('static', filename='previev'), title='Выбор тс')
 
 @app.route("/select", methods=['POST', 'GET'])
 def select():
@@ -58,4 +60,4 @@ def createCar(name='',
 
 
 if __name__ == "__main__":
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='0.0.0.0')
