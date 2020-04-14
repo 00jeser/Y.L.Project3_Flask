@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from data import db_session
 from data.car import Car
+import os
 
 
 db_session.global_init("db/cars.sqlite")
