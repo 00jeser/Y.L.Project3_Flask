@@ -60,4 +60,24 @@
         <td class="propertyValue">{{car.addedInGameDlS}}</td>
     </tr>
 </table>
+<div class="comments">
+    <div class="commentsInput">
+        <form class="commentsInputForm" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.user(type="hiden", value=current_user.id) }}
+            {{ form.text(class="cl") }}
+            {{ form.submit(type="submit", class="btn btn-primary") }}
+        </form>
+    </div>
+    {% for item in comms%}
+    <div class="commentsOne">
+        <div class="commentsOneUsername">
+            {{users[item.user].username}}#{{users[item.user].user_id}}
+        </div>
+        <div class="commentsOneContent">
+            {{item.content}}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
