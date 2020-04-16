@@ -96,7 +96,7 @@ def info(car):
         comm.user = form.user.data
         session.add(comm)
         session.commit()
-        return redirect("/")
+        return redirect("/info/"+car)
     cars = session.query(Car)[int(car)-1]
     comms = session.query(Comments).filter(Comments.carId == cars.id)
     users = session.query(User)

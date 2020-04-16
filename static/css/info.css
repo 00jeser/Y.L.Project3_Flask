@@ -14,3 +14,22 @@
     border-bottom: 1px;
     border-color: black;
 }
+
+.commentsOne{
+margin: 2px 0px;
+}
+.commentsOneUsername{
+    border-bottom: #AAA solid 1px;
+}
+.commentsInputFormHiden{
+    width: 0px;
+    visibility: hidden;
+}
+.commentsInputForm{
+    display: flex;
+    justify-content: stretch;
+}
+.commentsInputFormContent{
+    width: 100%;
+}
+
