@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="https://gtacompare.herokuapp.com/select"><button>Сравнить</button></a>
-<h1>Автомобили сайта</h1>
-{% for item in cars%}
-<div class="col-md6 border rounded">
-    <h2>{{item.name}}</h2>
-    <div>
-        Макс скорость - {{item.maxSpeed}}км/ч
-    </div>
-    <div>
-        Добавлена в игру в дополнении {{item.addedInGameDlS}}
-    </div>
-    <div>
-        Цена {{item.buyPryce}}
-    </div>
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+<div class="CompareBlok">
+    <a class="CompareBlokLink" href="https://gtacompare.herokuapp.com/select">
+        <button class="btn-primary CompareBlokLinkButton">Сравнить</button>
+    </a>
 </div>
+<h1 class="pageTitle">Автомобили сайта</h1>
+{% for item in cars%}
+<a class="carLink" href="https://gtacompare.herokuapp.com/info/{{item.id}}">
+    <div class="col-md6 border rounded">
+        <h2>{{item.name}}</h2>
+        <div>
+            Макс скорость - {{item.maxSpeed}}км/ч
+        </div>
+        <div>
+            Добавлена в игру в дополнении {{item.addedInGameDlS}}
+        </div>
+        <div>
+            Цена {{item.buyPryce}}
+        </div>
+    </div>
+</a>
 {% endfor %}
 {% endblock %}
