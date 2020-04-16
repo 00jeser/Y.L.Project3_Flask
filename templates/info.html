@@ -65,6 +65,7 @@
         <tr>
             <td>
                 <div class="comments">
+                    {% if current_user.is_authenticated %}
                     <div class="commentsInput">
                         <form class="commentsInputForm" action="" method="post" novalidate>
                             {{ form.hidden_tag() }}
@@ -73,6 +74,9 @@
                             {{ form.submit(type="submit", class="btn btn-primary commentsInputFormButton") }}
                         </form>
                     </div>
+                    {% else %}
+                    Для ввода комментариев войдите или зарегестрируйтесь
+                    {% endif %}
                     {% for item in comms%}
                     <div class="commentsOne col-md6 border rounded">
                         <div class="commentsOneUsername">
