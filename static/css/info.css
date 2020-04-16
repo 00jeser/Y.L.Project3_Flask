@@ -1,0 +1,16 @@
+.propertyValue{
+    text-align: right;
+    color: black;
+    font-family: Calibri, 'Gill Sans MT', 'Gill Sans', 'Trebuchet MS', sans-serif;
+    width: 50%;
+    border-bottom: 1px;
+    border-color: black;
+}
+.propertyTitle{
+    text-align: left;
+    color: black;
+    font-family: Calibri, 'Gill Sans MT', 'Gill Sans', 'Trebuchet MS', sans-serif;
+    width: 50%;
+    border-bottom: 1px;
+    border-color: black;
+}

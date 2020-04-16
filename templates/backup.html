@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if current_user.admin %}
+<a class="navbar-brand" download href="{{path}}">Download</a>
+{% else %}
+<a class="navbar-brand" href="/">ViNeAdmin</a>
+{% endif %}
+{% endblock %}

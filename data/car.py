@@ -25,6 +25,8 @@ class Car(SqlAlchemyBase, JSONEncoder):
     clas = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     privod = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     addedInGameDlS = sqlalchemy.Column(sqlalchemy.String)
+    def ids(self):
+        return str(id)
     def default(self, o):
             return o.__dict__
 

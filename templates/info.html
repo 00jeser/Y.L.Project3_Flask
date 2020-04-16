@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/info.css')}}">
+<h1 align="center">{{car.name}}</h1>
+<div align="center">
+    <img src="{{url_for('static',filename='previev/'+path+'.jpg')}}" width="50%" align="center">
+</div>
+<table width="50%" align="center">
+    <tr>
+        <td class="propertyTitle">Максимальная скорость</td>
+        <td class="propertyValue">{{car.maxSpeed}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Масса</td>
+        <td class="propertyValue">{{car.mass}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Количество человек</td>
+        <td class="propertyValue">{{car.persons}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Тип двигателя</td>
+        <td class="propertyValue">{{car.engineType}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Цена покупки</td>
+        <td class="propertyValue">{{car.buyPryce}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Время прохождения 1/4 мили</td>
+        <td class="propertyValue">{{car.mil14}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Время прохождения 1/2 мили</td>
+        <td class="propertyValue">{{car.mil12}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Время прохождения 1 мили</td>
+        <td class="propertyValue">{{car.mil1}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Управляемость</td>
+        <td class="propertyValue">{{car.control}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Торможение</td>
+        <td class="propertyValue">{{car.stop}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Класс автомобиля</td>
+        <td class="propertyValue">{{car.clas}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Привод</td>
+        <td class="propertyValue">{{car.privod}}</td>
+    </tr>
+    <tr>
+        <td class="propertyTitle">Добавлена в DLS</td>
+        <td class="propertyValue">{{car.addedInGameDlS}}</td>
+    </tr>
+</table>
+{% endblock %}

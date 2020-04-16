@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from data import db_session
 from data.car import Car
 from data.user import User
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from data.loginform import LoginForm
 from data.registerform import RegisterForm
 import json
@@ -77,6 +77,16 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
+
+
+@app.route('/backup')
+def backup():
+    return render_template("backup.html", path=url_for('db', filename='cars.sqlite'))
+
+@app.route('/info/<car>')
+def info(car):
+    cars=session.query(Car)[int(car)-1]
+    return render_template("info.html", path=str(cars.id), car=cars)
 
 
 @app.route('/register', methods=['GET', 'POST'])
