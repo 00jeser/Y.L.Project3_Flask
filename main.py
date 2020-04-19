@@ -44,6 +44,7 @@ def main():
     rezult = list()
     for car in cars:
         rez = dict()
+        rez["url"] = "https://gtacompare.herokuapp.com/info/" + str(car.id)
         rez["name"] = car.name
         rez["maxSpeed"] = car.maxSpeed
         rez["mass"] = car.mass
